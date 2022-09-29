@@ -1,0 +1,315 @@
+$primary: #0052cc;
+$font: #123571;
+$border: #e1edfb;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, sans-serif;
+  background: #f5faff;
+  color: $font;
+  @media (max-width: 48rem) {
+    font-size: 0.9375rem;
+  }
+}
+h2 {
+  margin-top: 0;
+}
+a {
+  color: #0d6efd;
+}
+.container {
+  max-width: 80vw;
+  margin: 0 auto;
+  @media (max-width: 78.75rem) {
+    padding: 0 1.875rem;
+  }
+  @media (max-width: 48rem) {
+    padding: 0 1.25rem;
+  }
+}
+.btn {
+  background-color: $primary;
+  color: white;
+  padding: 0.9375rem 1.875rem;
+  border-radius: 0.1875rem;
+  margin-top: 1.875rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s;
+  @media (max-width: 25.875rem) {
+    width: 100%;
+    margin: 1.875rem 0;
+  }
+  &:hover {
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.2);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+p {
+  text-align: justify;
+  margin: 0 0 1.25rem;
+}
+header {
+  width: 100%;
+  background-color: $primary;
+  color: white;
+  .container {
+    height: 5rem;
+    line-height: 5rem;
+    text-align: center;
+  }
+}
+main {
+  min-height: calc(100vh - 11.875rem);
+  .tab-header {
+    margin: 1.875rem 0;
+    border-bottom: 0.125rem solid $border;
+    button {
+      background-color: #e8f0f2;
+      border: none;
+      padding: 0.9375rem 1.875rem;
+      outline: none;
+      cursor: pointer;
+      font-size: 1.125rem;
+      font-weight: 700;
+      border: none;
+      @media (max-width: 48rem) {
+        padding: 0.9375rem 1.25rem;
+        font-size: 1rem;
+      }
+      @media (max-width: 25.875rem) {
+        width: 50%;
+      }
+      &.active {
+        background-color: $primary;
+        color: white;
+        cursor: default;
+        position: relative;
+        &::before {
+          content: "";
+          width: 100%;
+          height: 0.125rem;
+          background-color: $primary;
+          position: absolute;
+          bottom: -0.125rem;
+          left: 0;
+        }
+      }
+    }
+  }
+  .lorem-ipsum-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6.25rem;
+    .props {
+      width: 30%;
+      .prop {
+        label {
+          display: block;
+          width: 100%;
+        }
+        .slider {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 0.625rem;
+          margin-top: 1.25rem;
+          background: $border;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: 0.2s;
+          transition: opacity 0.2s;
+          &:hover {
+            opacity: 1;
+          }
+          &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 0.75rem;
+            height: 1.5rem;
+            background: $primary;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+          }
+          &::-moz-range-thumb {
+            width: 0.75rem;
+            height: 1.5rem;
+            background: $primary;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+          }
+        }
+        .checkbox {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+        .radio-group {
+          display: flex;
+          align-items: center;
+          gap: 0.625rem;
+          width: fit-content;
+          & + .radio-group {
+            margin-top: 0.625rem;
+          }
+        }
+        & + .prop {
+          margin-top: 1.875rem;
+        }
+        &.same-line {
+          label {
+            display: flex;
+            align-items: center;
+          }
+          input {
+            display: inline-block;
+            margin-left: 1.25rem;
+          }
+        }
+      }
+    }
+    .output-wrapper {
+      width: 70%;
+    }
+    .output {
+      background-color: white;
+      padding: 1.875rem;
+      margin: 0.625rem 0 1.25rem;
+      border: 0.125rem solid $border;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 500;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+      }
+      ul,
+      ol {
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+      blockquote {
+        padding: 0.625rem 1.25rem;
+        font-size: 1.09375rem.5;
+        border-left: 0.3125rem solid #eee;
+        margin: 0 0 1rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      dl {
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      dt {
+        font-weight: 700;
+      }
+      dd {
+        margin-bottom: 0.5rem;
+        margin-left: 0;
+      }
+      pre {
+        display: block;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        overflow: auto;
+        font-size: 0.8125rem;
+        background: #f1f1f1;
+        padding: 0.625rem;
+      }
+    }
+  }
+  .editors__row {
+    display: flex;
+    gap: 1.875rem;
+  }
+  .editors__col {
+    width: 50%;
+    &-title {
+      font-size: 1.125rem;
+      text-align: center;
+      margin-bottom: 0.625rem;
+    }
+  }
+  .ace_editor {
+    width: 100% !important;
+    height: 37.5rem !important;
+    font-size: 0.875rem !important;
+    border-bottom: 0.125rem solid #999;
+  }
+}
+//Switch {
+.switch {
+  input[type="checkbox"] {
+    display: block;
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+  label {
+    cursor: pointer;
+    text-indent: -624.9375rem;
+    width: 2.5rem;
+    height: 1.25rem;
+    background: grey;
+    display: block;
+    border-radius: 3.125rem;
+    position: relative;
+  }
+  label:after {
+    content: "";
+    position: absolute;
+    top: 0.3125rem;
+    left: 0.3125rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    background: #fff;
+    border-radius: 1.875rem;
+    transition: 0.3s;
+  }
+  input:checked + label {
+    background: #bada55;
+  }
+  input:checked + label:after {
+    left: calc(100% - 0.3125rem);
+    transform: translateX(-100%);
+  }
+  label:active:after {
+    width: 3.125rem;
+  }
+}
+
+footer {
+  width: 100%;
+  height: 5rem;
+  background-color: $primary;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.875rem;
+  a {
+    color: white;
+    margin-left: 0.3125rem;
+  }
+}
