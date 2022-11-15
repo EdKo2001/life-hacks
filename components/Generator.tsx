@@ -9,11 +9,14 @@ import {
   splitHeading,
 } from "../utils";
 
+import data from "../data/sentences.json";
+
 // Default Props of the Component
 const defaultProps = {
+  movieCategory: "aladdin",
   cntParagraph: 1,
   sentencesPerParagraph: 8,
-  startWithMoviesIpsum: true,
+  startWithMovieIpsum: true,
   data: [],
   link: false,
   bold: false,
@@ -27,13 +30,13 @@ const defaultProps = {
 };
 
 // Get a random Sentence from Latin Sentence list
-const getRandomSentence = (data: any[]): string => {
-  const randomSentence: string | undefined =
-    data[randomFromRange(0, data.length - 1)].attributes.feature_details
-      .parent_title;
-  return randomSentence === undefined
-    ? getRandomSentence(data)
-    : randomSentence;
+const getRandomSentence = (data: any[], movieCategory: string) => {
+  // data[randomFromRange(0, data.length - 1)].attributes.feature_details
+  //   .parent_title;
+  const categorisedData = data.find((data) => data.id === movieCategory);
+  return categorisedData.phrases[
+    randomFromRange(0, categorisedData.phrases.length - 1)
+  ];
 };
 
 // Get a punctuation for end of the sentence randomly
@@ -47,41 +50,45 @@ const endPunctuation = () => {
 
 // Create a Sentence by using random words
 const createSentence = ({
-  withMoviesIpsum,
+  withMovieIpsum,
   withLink,
   withBold,
   withItalic,
   rawSentence,
-  data,
-}: {
-  withMoviesIpsum?: boolean;
+  movieCategory,
+}: // data,
+{
+  withMovieIpsum?: boolean;
   withLink?: boolean;
   withBold?: boolean;
   withItalic?: boolean;
   rawSentence?: boolean;
-  data: any[];
+  movieCategory: string;
+  data?: any[];
 }) => {
-  if (withMoviesIpsum) return "Movies ipsum ";
+  if (withMovieIpsum) return "Movies ipsum ";
   if (withLink)
     // eslint-disable-next-line @next/next/no-html-link-for-pages
     return `<a href="https://ez-digital.com/">${getRandomSentence(
-      data
-    )}</a>${endPunctuation()}`;
-  if (withBold) return `<b>${getRandomSentence(data)}</b>${endPunctuation()}`;
-  if (withItalic) return `<i>${getRandomSentence(data)}</i>${endPunctuation()}`;
-  if (rawSentence) return getRandomSentence(data);
-  return getRandomSentence(data) + endPunctuation();
+      data,
+      movieCategory
+    )}</a>`; //${endPunctuation()}
+  if (withBold) return `<b>${getRandomSentence(data, movieCategory)}</b>`; //${endPunctuation()}
+  if (withItalic) return `<i>${getRandomSentence(data, movieCategory)}</i>`; //${endPunctuation()}
+  if (rawSentence) return getRandomSentence(data, movieCategory);
+  return getRandomSentence(data, movieCategory); //+ endPunctuation();
 };
 
 // Create a paragraph by joining sentences
 const createRandomParagraph = ({
+  movieCategory,
   currentParagraph,
   firstParagraph,
   headings,
   ulParagraph,
   olParagraph,
   sentencesPerParagraph,
-  startWithMoviesIpsum,
+  startWithMovieIpsum,
   link,
   bold,
   ul,
@@ -94,6 +101,7 @@ const createRandomParagraph = ({
   code,
   data,
 }: {
+  movieCategory: string;
   currentParagraph: number;
   firstParagraph: boolean;
   headings: boolean;
@@ -101,7 +109,7 @@ const createRandomParagraph = ({
   olParagraph: boolean;
   cntParagraph: number;
   sentencesPerParagraph: number;
-  startWithMoviesIpsum: number;
+  startWithMovieIpsum: number;
   link: boolean;
   bold: boolean;
   ul: boolean;
@@ -115,9 +123,9 @@ const createRandomParagraph = ({
   data: any[];
 }) => {
   const swmi =
-    typeof startWithMoviesIpsum === "boolean"
-      ? startWithMoviesIpsum
-      : defaultProps.startWithMoviesIpsum;
+    typeof startWithMovieIpsum === "boolean"
+      ? startWithMovieIpsum
+      : defaultProps.startWithMovieIpsum;
 
   const linkPosition = randomFromRange(0, sentencesPerParagraph * 2);
   const boldPosition = randomUniqueFromRange(0, sentencesPerParagraph * 2, [
@@ -134,31 +142,37 @@ const createRandomParagraph = ({
       case 0:
         paragraph += `<h1>${createSentence({
           data,
+          movieCategory,
         })}</h1>`;
         break;
       case 1:
         paragraph += `<h2>${createSentence({
           data,
+          movieCategory,
         })}</h2>`;
         break;
       case 2:
         paragraph += `<h3>${createSentence({
           data,
+          movieCategory,
         })}</h3>`;
         break;
       case 3:
         paragraph += `<h4>${createSentence({
           data,
+          movieCategory,
         })}</h4>`;
         break;
       case 4:
         paragraph += `<h5>${createSentence({
           data,
+          movieCategory,
         })}</h5>`;
         break;
       case 5:
         paragraph += `<h6>${createSentence({
           data,
+          movieCategory,
         })}</h6>`;
         break;
     }
@@ -168,6 +182,7 @@ const createRandomParagraph = ({
     for (let i = 0; i < randomFromRange(2, 6); i += 1) {
       paragraph += `<li key="${i}">${createSentence({
         data,
+        movieCategory,
       })}</li>`;
     }
     paragraph += "</ul>";
@@ -176,6 +191,7 @@ const createRandomParagraph = ({
     for (let i = 0; i < randomFromRange(2, 6); i += 1) {
       paragraph += `<li>${createSentence({
         data,
+        movieCategory,
       })}</li>`;
     }
     paragraph += "</ol>";
@@ -187,34 +203,42 @@ const createRandomParagraph = ({
     for (let i = 0; i < randomFromRange(2, 4); i += 1) {
       paragraph += `<dt key="${i}"><dfn>${createSentence({
         data,
+        movieCategory,
       })}</dfn></dt>
       <dd>${createSentence({
         data,
+        movieCategory,
       })}</dd>`;
     }
     paragraph += "</dl>";
   } else if (codeParagraph && code) {
     paragraph = `<pre key='pre'><code>&lt;!-- ${createSentence({
       data,
+      movieCategory,
     })} --&gt;\n&lt;animi&gt;${createSentence({
       data,
+      movieCategory,
     })}&lt;/animi&gt;\n&lt;id&gt;${createSentence({
       data,
+      movieCategory,
     })}&lt;/id&gt; \n&lt;ut&gt;${createSentence({
       data,
+      movieCategory,
     })}&lt;/ut&gt;</code></pre>`;
   } else {
     for (let i = 0; i < sentencesPerParagraph; i += 1) {
-      const withMoviesIpsum = !!(i === 0 && firstParagraph && swmi);
+      const withMovieIpsum = !!(i === 0 && firstParagraph && swmi);
       const withLink = !!(i === linkPosition && link);
       const withBold = !!(i === boldPosition && bold);
       const withItalic = !!(i === italicPosition && bold);
+
       paragraph += `${createSentence({
-        withMoviesIpsum,
+        withMovieIpsum,
         withLink,
         withBold,
         withItalic,
         data,
+        movieCategory,
       })} `;
     }
   }
@@ -265,26 +289,30 @@ const moviesIpsum = (props: any | object = {}) => {
 };
 
 // Component create Movie Ipsum as HTML
-const MoviesIpsum = forwardRef((props: MoviesIpsumProps, ref) => {
-  const [paragraphs, setParagraphs] = useState<string[]>([]);
+const MoviesIpsum = forwardRef((props: MovieIpsumProps, ref) => {
+  const [html, setHTML] = useState<(string | JSX.Element | JSX.Element[])[]>();
+
   useMemo(() => {
-    setParagraphs(moviesIpsum(props));
+    const paragraphs = moviesIpsum(props);
+
+    if (props.noHtml) {
+      setHTML(paragraphs.map((paragraph) => paragraph));
+    } else {
+      setHTML(
+        paragraphs.map((paragraph: string, idx) =>
+          /<\/ol>|<\/ul>|<\/blockquote>|<\/dl>|<\/code>/g.test(paragraph) ? (
+            parse(paragraph)
+          ) : /<h1>|<h2>|<h3>|<h4>|<h5>|<h6>/g.test(paragraph) ? (
+            splitHeading(paragraph, idx)
+          ) : (
+            <p key={idx}>{parse(paragraph)}</p>
+          )
+        )
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.callback]);
-  let html;
-  if (props.noHtml) {
-    html = paragraphs.map((paragraph) => paragraph);
-  } else {
-    html = paragraphs.map((paragraph: string, idx) =>
-      /<\/ol>|<\/ul>|<\/blockquote>|<\/dl>|<\/code>/g.test(paragraph) ? (
-        parse(paragraph)
-      ) : /<h1>|<h2>|<h3>|<h4>|<h5>|<h6>/g.test(paragraph) ? (
-        splitHeading(paragraph, idx)
-      ) : (
-        <p key={idx}>{parse(paragraph)}</p>
-      )
-    );
-  }
+
   return (
     <div className="output" ref={ref as React.RefObject<HTMLDivElement>}>
       {html}
@@ -294,11 +322,12 @@ const MoviesIpsum = forwardRef((props: MoviesIpsumProps, ref) => {
 
 MoviesIpsum.displayName = "MoviesIpsum";
 
-interface MoviesIpsumProps {
+interface MovieIpsumProps {
+  movieCategory: string;
   cntParagraph: number | string;
   sentencesPerParagraph: number | string;
-  startWithMoviesIpsum: boolean;
-  data: any[];
+  startWithMovieIpsum: boolean;
+  data?: any[];
   callback: boolean;
   link: boolean;
   bold: boolean;
