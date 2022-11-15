@@ -4,7 +4,7 @@ const Footer = () => (
   <footer>
     <span>Developed by</span>
     <a
-      href="https://github.com/EdKo2001"
+      href="https://eduard-koshkelyan.com/"
       target="_blank"
       rel="noopener noreferrer"
     >

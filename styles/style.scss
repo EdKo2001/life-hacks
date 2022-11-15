@@ -13,7 +13,7 @@ body {
     Helvetica Neue, Arial, sans-serif;
   background: #f5faff;
   color: $font;
-  @media (max-width: 48rem) {
+  @media (max-width: 768px) {
     font-size: 0.9375rem;
   }
 }
@@ -24,14 +24,9 @@ a {
   color: #0d6efd;
 }
 .container {
-  max-width: 80vw;
+  width: 80vw;
+  max-width: 90rem;
   margin: 0 auto;
-  @media (max-width: 78.75rem) {
-    padding: 0 1.875rem;
-  }
-  @media (max-width: 48rem) {
-    padding: 0 1.25rem;
-  }
 }
 .btn {
   background-color: $primary;
@@ -43,10 +38,6 @@ a {
   outline: none;
   cursor: pointer;
   transition: 0.2s;
-  @media (max-width: 25.875rem) {
-    width: 100%;
-    margin: 1.875rem 0;
-  }
   &:hover {
     box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.2);
   }
@@ -84,11 +75,11 @@ main {
       font-size: 1.125rem;
       font-weight: 700;
       border: none;
-      @media (max-width: 48rem) {
+      @media (max-width: 768px) {
         padding: 0.9375rem 1.25rem;
         font-size: 1rem;
       }
-      @media (max-width: 25.875rem) {
+      @media (max-width: 414px) {
         width: 50%;
       }
       &.active {
@@ -236,6 +227,12 @@ main {
         font-size: 0.8125rem;
         background: #f1f1f1;
         padding: 0.625rem;
+
+        white-space: pre-wrap; /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
       }
     }
   }
@@ -257,7 +254,25 @@ main {
     font-size: 0.875rem !important;
     border-bottom: 0.125rem solid #999;
   }
+  // Media Queries
+  @media (max-width: 768px) {
+    .lorem-ipsum-row {
+      flex-direction: column;
+      gap: 0;
+      .props,
+      .output-wrapper {
+        width: 100%;
+      }
+    }
+    .editors__row {
+      flex-direction: column;
+    }
+    .editors__col {
+      width: 100%;
+    }
+  }
 }
+
 //Switch {
 .switch {
   input[type="checkbox"] {
@@ -305,16 +320,16 @@ main {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  padding: 0 30px 0 10px;
+  padding: 0 1.875rem 0 0.625rem;
 
-  border: 1px solid #123571;
-  border-radius: 3px;
-  line-height: 36px;
-  height: 36px;
-  box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  border: 0.0625rem solid #123571;
+  border-radius: 0.1875rem;
+  line-height: 2.25rem;
+  height: 2.25rem;
+  box-shadow: inset 0.0625rem 0.0625rem 0.0625rem 0rem rgba(0, 0, 0, 0.2);
 
-  min-width: 200px;
-  margin: 0 5px 5px 0;
+  min-width: 12.5rem;
+  margin: 0 0.3125rem 0.3125rem 0;
 
   //fix for ie 10 later
   &::-ms-expand {
@@ -325,34 +340,34 @@ main {
     display: inline-block;
     &:before {
       content: "";
-      height: 31px;
+      height: 1.9375rem;
       position: absolute;
-      right: 7px;
-      top: 3px;
-      width: 22px;
+      right: 0.4375rem;
+      top: 0.1875rem;
+      width: 1.375rem;
 
       //background: -webkit-linear-gradient(#fff, #f0f0f0);
       //background: -moz-linear-gradient(#fff, #f0f0f0);
       //background: linear-gradient(#f5f5f5, #e0e0e0);
       background: #fff; //for Firefox in Android
 
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
+      border-top-right-radius: 0.1875rem;
+      border-bottom-right-radius: 0.1875rem;
       pointer-events: none;
       display: block;
     }
     &:after {
       content: " ";
       position: absolute;
-      right: 15px;
+      right: 0.9375rem;
       top: 46%;
-      margin-top: -3px;
+      margin-top: -0.1875rem;
       z-index: 2;
       pointer-events: none;
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 6.9px 4px 0 4px;
+      border-width: 0.43125rem 0.25rem 0 0.25rem;
       border-color: #123571 transparent transparent transparent;
       pointer-events: none;
     }
