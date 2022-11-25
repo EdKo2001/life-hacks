@@ -24,7 +24,7 @@ interface defaultComponentPropsKeys {
   [key: string]: number | boolean;
 }
 
-const MovieIpsumComponent = ({ data }: { data?: any[] }) => {
+const MovieIpsumComponent = () => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
   const [isCopied, setCopied] = useState(false);
   const [callback, setCallback] = useState(false);
@@ -272,7 +272,6 @@ const MovieIpsumComponent = ({ data }: { data?: any[] }) => {
         <section className="output-wrapper">
           <h2 style={{ marginTop: 20 }}>Output</h2>
           <MoviesIpsum
-            // data={data}
             ref={outputRef}
             callback={callback}
             {...componentProps}

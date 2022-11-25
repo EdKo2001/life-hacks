@@ -1,19 +1,19 @@
-import type { NextPage } from "next";
-import dynamic from "next/dynamic";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+
+import type { NextPage } from "next";
 
 const MoviesIpsum = dynamic(() => import("../components/MoviesIpsum"), {
   ssr: false,
 });
+
 const RMConvertor = dynamic(() => import("../components/RMConvertor"), {
   ssr: false,
 });
 
-interface HomeProps {
-  data: [];
-}
+interface HomeProps {}
 
-const Home: NextPage<HomeProps> = ({ data }) => {
+const Home: NextPage<HomeProps> = () => {
   const [tab, setTab] = useState("lipsum");
 
   return (
@@ -34,32 +34,10 @@ const Home: NextPage<HomeProps> = ({ data }) => {
           PX To Rem
         </button>
       </div>
-      {tab === "lipsum" && <MoviesIpsum data={data} />}
-      {tab === "rem" && <RMConvertor />}{" "}
+      {tab === "lipsum" && <MoviesIpsum />}
+      {tab === "rem" && <RMConvertor />}
     </div>
   );
 };
-
-export async function getServerSideProps() {
-  const res = await fetch(
-    `https://api.opensubtitles.com/api/v1/subtitles?query=murder`,
-    {
-      headers: {
-        "Api-Key": "9u10mGxt1ZKP3eUvCK3onu2l1YwOJsbS",
-      },
-    }
-  );
-  const data = await res.json();
-
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { data: data.data },
-  };
-}
 
 export default Home;
