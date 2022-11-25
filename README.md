@@ -11,7 +11,7 @@
 
 Implemented the text generator with movie names and created the PX TO REM converter, which allows to transform all px to rem straightaway.
 
-**[Demo](https://codesandbox.io/s/github/EdKo2001/life-hacks)**
+**[Demo](https://life-hacks.onrender.com/)**
 
 ## Getting Started
 
