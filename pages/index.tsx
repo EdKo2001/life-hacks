@@ -31,7 +31,7 @@ const Home: NextPage<HomeProps> = () => {
           className={tab === "rem" ? "active" : ""}
           onClick={() => setTab("rem")}
         >
-          PX To Rem
+          PX To REM
         </button>
       </div>
       {tab === "lipsum" && <MoviesIpsum />}
