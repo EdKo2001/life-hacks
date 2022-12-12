@@ -1,3 +1,10 @@
+<h1 align="center">LIFE HACKS</h1>
+
+<p align="center">
+    <img align="center" src="https://user-images.githubusercontent.com/53624093/207134436-a7d1aace-08d5-40ab-aa9e-28977d3c200d.gif">
+</p>
+
+
 ## Stack
 
 - React
